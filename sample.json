@@ -1,5 +1,7 @@
 {
     "key": "d9893e9b9e5f4e5180c1bbbe0a4cf42f",
+    "name":"Sample App",
+    "logoUrl":null,
     "config": [
         {
             "key": "key1",
