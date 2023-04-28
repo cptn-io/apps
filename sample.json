@@ -1,15 +1,15 @@
 {
     "key": "d9893e9b9e5f4e5180c1bbbe0a4cf42f",
-    "name":"Sample App",
+    "name":"Sample App new",
     "logoUrl":null,
     "config": [
         {
-            "key": "key1",
+            "key": "key2",
             "value": "",
             "secret": false
         }
     ],
-    "script": "//script goes here",
+    "script": "//script goes here - updated",
     "type": "DESTINATION",
-    "hash": "d9893e9b9e5f4e5180c1bbbe0a4cf42g"
+    "hash": "d9893e9b9e5f4e5180c1bbbe0a4cf42h"
 }
