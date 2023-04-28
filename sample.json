@@ -1,0 +1,13 @@
+{
+    "key": "d9893e9b9e5f4e5180c1bbbe0a4cf42f",
+    "config": [
+        {
+            "key": "key1",
+            "value": "",
+            "secret": false
+        }
+    ],
+    "script": "//script goes here",
+    "type": "DESTINATION",
+    "hash": "d9893e9b9e5f4e5180c1bbbe0a4cf42g"
+}
