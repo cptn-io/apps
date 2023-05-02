@@ -2,7 +2,6 @@
   "key":"fd2a9d438a8a4b4fb2bdb7d68da52c15",
   "name":"IP to Location",
   "script":"var geoip = require('geoip-lite');\n\nmodule.exports = function (event, ctx) {\n    const ip = event.ip;\n    if (ip) {\n        event.location = geoip.lookup(ip);\n    }\n    \n    return event;\n}",
-  "active":true,
   "type": "TRANSFORMATION",
   "hash": "b1b1029e3d50f4d32df46a2f7b12f252"
 }
