@@ -1,5 +1,5 @@
 {
-  "id":"cb2b07ff16ea4831b4c54ba2c2a48b06",
+  "key":"cb2b07ff16ea4831b4c54ba2c2a48b06",
   "name":"Slack - Send message to a Channel",
   "script":"module.exports = {\n    execute: async function(event, ctx, config) { /* required */\n\n        if(event.message) {\n            const payload = {\n                text: event.message\n            }\n\n            if (event.channel) {\n                payload.channel = event.channel\n            }\n            \n            const response = await fetch(config.webhook_url, {\n                method: \"POST\",\n                headers: {\n                \"Content-Type\": \"application/json\"\n                },    \n                body: JSON.stringify(payload)\n            });\n            \n            if(!response.ok) {\n                console.error('Http call to Slack has failed', response.status);\n                throw new Error('Http call to Slack has failed');\n            }\n        }\n    }\n    \n}",
   "config":[
