@@ -9,7 +9,7 @@
       "secret":false
     }
   ],
-  "logoUrl":"https://cdn.simpleicons.org/slack"
+  "logoUrl":"https://cdn.simpleicons.org/slack",
   "type": "DESTINATION",
   "hash": "ac645ee179adc98ec7feadf5cba9954a"
 }
