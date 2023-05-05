@@ -1,0 +1,8 @@
+{
+  "key": "1c10df475422416f95cf748e7629861b",
+  "logoUrl": null,
+  "hash": "785d3b3a5ff18e241e0aa829e7abb1bf",
+  "name": "Redact SSN from event",
+  "script": "function stripSSN(obj) {\n    if (typeof obj !== 'object' || obj === null) {\n      return obj;\n    }\n  \n    if (Array.isArray(obj)) {\n      return obj.map((item) => stripSSN(item));\n    }\n  \n    const strippedObj = {};\n  \n    for (const [key, value] of Object.entries(obj)) {\n      if (typeof value === 'string') {\n        strippedObj[key] = value.replace(/\bd{3}-d{2}-d{4}\b/g, 'XXX-XX-XXXX');\n      } else {\n        strippedObj[key] = stripSSN(value);\n      }\n    }\n  \n    return strippedObj;\n  }\n  \n  module.exports = function (event, ctx) {    \n      event = stripSSN(event);\n      return event;\n  }",
+  "type": "TRANSFORMATION"
+}
