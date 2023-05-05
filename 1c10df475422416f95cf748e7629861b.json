@@ -1,8 +1,8 @@
 {
   "key": "1c10df475422416f95cf748e7629861b",
   "logoUrl": null,
-  "hash": "10b9968f45a1b276143cc1c43ee40ae9",
+  "hash": "593f7978d4a94690b27c27e389a487e5",
   "name": "Redact SSN from event",
-  "script": "function stripSSN(obj) {\n    if (typeof obj !== 'object' || obj === null) {\n      return obj;\n    }\n  \n    if (Array.isArray(obj)) {\n      return obj.map((item) => stripSSN(item));\n    }\n  \n    const strippedObj = {};\n  \n    for (const [key, value] of Object.entries(obj)) {\n      if (typeof value === 'string') {\n        strippedObj[key] = value.replace(/\b\d{3}-\d{2}-\d{4}\b/g, 'XXX-XX-XXXX');\n      } else {\n        strippedObj[key] = stripSSN(value);\n      }\n    }\n  \n    return strippedObj;\n  }\n  \n  module.exports = function (event, ctx) {    \n      event = stripSSN(event);\n      return event;\n  }",
+  "script": "function stripSSN(obj) {\n    if (typeof obj !== 'object' || obj === null) {\n      return obj;\n    }\n  \n    if (Array.isArray(obj)) {\n      return obj.map((item) => stripSSN(item));\n    }\n  \n    const strippedObj = {};\n  \n    for (const [key, value] of Object.entries(obj)) {\n      if (typeof value === 'string') {\n        strippedObj[key] = value.replace(\\/\bd{3}-d{2}-d{4}\b\\/g, 'XXX-XX-XXXX');\n      } else {\n        strippedObj[key] = stripSSN(value);\n      }\n    }\n  \n    return strippedObj;\n  }\n  \n  module.exports = function (event, ctx) {    \n      event = stripSSN(event);\n      return event;\n  }",
   "type": "TRANSFORMATION"
 }
