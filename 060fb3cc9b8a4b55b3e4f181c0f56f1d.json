@@ -1,7 +1,7 @@
 {
   "key": "060fb3cc9b8a4b55b3e4f181c0f56f1d",
-  "logoUrl": null,
-  "hash": "0e4e7b038805d1f883cda77bfc5a1efc",
+  "logoUrl": "https://cdn.simpleicons.org/twilio",
+  "hash": "1fe71d4c383894517ef74ca5b1529c10",
   "name": "Sendgrid - Add user to Contacts",
   "script": "const client = require('@sendgrid/client');\n\nmodule.exports = {    \n    execute: function(event, ctx, config) { \n        client.setApiKey(config.SENDGRID_API_KEY);\n        const data = {\n            \"list_ids\":[config.LIST_ID],\n            \"contacts\": [\n                {\n                \"email\": event.mail_to  \n                }\n            ]\n        };\n        const request = {\n            url: '/v3/marketing/contacts',\n            method: 'PUT',\n            body: data\n        }\n\n        const promise = client.request(request)\n        promise.then(([response, body]) => {\n                console.log(response.statusCode);\n                console.log(response.body);\n            })\n        .catch(error => {\n            console.error(error);\n            throw \"Failed to add contact\";\n        });\n        \n        return promise;\n    }\n}\n",
   "type": "DESTINATION",
