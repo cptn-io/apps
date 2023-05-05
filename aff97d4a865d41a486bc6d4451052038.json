@@ -1,0 +1,15 @@
+{
+  "key": "aff97d4a865d41a486bc6d4451052038",
+  "logoUrl": "https://cdn.simpleicons.org/stripe",
+  "hash": "e9d781b3726c97ce852418f926ccaff1",
+  "name": "Stripe - Create Customer",
+  "script": "\nconst Stripe = require('stripe');\n\nmodule.exports = {\n    execute: function(event, ctx, config) { /* required */\n        const stripe = new Stripe(config.SECRET_KEY);\n\n        const promise = stripe.customers.create({\n                \"email\": event.email,\n                \"name\": event.name\n            })\n            .then(customer => console.log(customer.id))\n            .catch(error => {\n                console.error(error)\n                throw \"Failed to create Stripe customer\";\n            });\n\n        return promise;\n    }\n}\n",
+  "type": "DESTINATION",
+  "config": [
+    {
+      "key": "SECRET_KEY",
+      "value": "",
+      "secret": true
+    }
+  ]
+}
