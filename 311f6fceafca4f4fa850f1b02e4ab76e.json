@@ -1,0 +1,15 @@
+{
+  "key": "311f6fceafca4f4fa850f1b02e4ab76e",
+  "logoUrl": "https://cdn.simpleicons.org/microsoftteams",
+  "hash": "5602fa2b5151eba2ffe89877c09eb787",
+  "name": "Teams - Send a message",
+  "script": "\nconst getPayload = function(message, url) {\n  return {\n      \"type\": \"message\",\n      \"attachments\": [\n      {\n    \"contentType\": \"application/vnd.microsoft.card.adaptive\",\n    \"contentUrl\": null,\n    \"content\": {\n      \"type\": \"AdaptiveCard\",\n      \"body\": [\n        {\n          \"type\": \"TextBlock\",\n          \"size\": \"Medium\",\n          \"weight\": \"Bolder\",\n          \"text\": message,\n          \"color\": \"warning\",\n          \"wrap\": true,\n          \"style\": \"heading\"\n        },          \n      ],\n      \"actions\": [\n        {\n          \"type\": \"Action.OpenUrl\",\n          \"title\": \"More details\",\n          \"url\": url\n        }\n      ],\n      \"$schema\": \"http://adaptivecards.io/schemas/adaptive-card.json\",\n      \"version\": \"1.4\"\n    }\n  }\n]\n}\n}\n\nmodule.exports = {   \n  execute: async function(event, ctx, config) { /* required */\n      const payload = getPayload(event.message, event.url);\n\n      const response = await fetch(config.WEBHOOK_URL, {\n          method: \"POST\",\n          headers: {\n          \"Content-Type\": \"application/json\"\n          },    \n          body: JSON.stringify(payload)\n      });\n          \n      if(!response.ok) {\n          console.error('Http call to Teams has failed', response.status);\n          throw new Error('Http call to Teams has failed');\n      }\n  }\n}\n",
+  "type": "DESTINATION",
+  "config": [
+    {
+      "key": "WEBHOOK_URL",
+      "value": "",
+      "secret": false
+    }
+  ]
+}
