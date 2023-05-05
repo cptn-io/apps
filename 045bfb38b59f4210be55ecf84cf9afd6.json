@@ -1,9 +1,9 @@
 {
   "key": "045bfb38b59f4210be55ecf84cf9afd6",
   "logoUrl": "https://cdn.simpleicons.org/twilio",
-  "hash": "7a2f7bc17c9f6e4b3db6dbc679d75cfb",
+  "hash": "b266d6b95d7b9e5889b27bf3b2108321",
   "name": "Sendgrid - Send email using template",
-  "script":"const sgMail = require('@sendgrid/mail')\n\nmodule.exports = {    \n    execute: async function(event, ctx, config) { /* required */\n        sgMail.setApiKey(config.SENDGRID_API_KEY);\n        const msg = {        \n            from: config.EMAIL_FROM,\n            subject: 'Test email',\n            template_id: config.TEMPLATE_ID,\n            personalizations: [\n                {                    \n                    \"to\": [\n                        {\n                        \"email\": event.mail_to\n                        }\n                    ],\n                    \"dynamic_template_data\": {\n                        \"firstName\": event.firstName,\n                        \"lastName\": event.lastName\n                    }\n                },\n            ],\n        };\n\n        try {\n            await sgMail.send(msg)\n        } catch(error) {\n            console.log(\"Failed to send email\", error);\n            throw \"Failed to send via Sendgrid\";\n        }\n\n    }\n}",
+  "script":"const sgMail = require('@sendgrid/mail')\n\nmodule.exports = {    \n    execute: async function(event, ctx, config) { /* required */\n        sgMail.setApiKey(config.SENDGRID_API_KEY);\n        const msg = {        \n            from: config.EMAIL_FROM,\n            template_id: config.TEMPLATE_ID,\n            personalizations: [\n                {                    \n                    \"to\": [\n                        {\n                        \"email\": event.mail_to\n                        }\n                    ],\n                    \"dynamic_template_data\": {\n                        \"firstName\": event.firstName,\n                        \"lastName\": event.lastName\n                    }\n                },\n            ],\n        };\n\n        try {\n            await sgMail.send(msg)\n        } catch(error) {\n            console.log(\"Failed to send email\", error);\n            throw \"Failed to send via Sendgrid\";\n        }\n\n    }\n}",
   "type": "DESTINATION",
   "config": [
     {
