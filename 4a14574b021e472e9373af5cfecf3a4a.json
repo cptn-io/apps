@@ -1,0 +1,30 @@
+{
+  "key": "4a14574b021e472e9373af5cfecf3a4a",
+  "logoUrl": "https://cdn.simpleicons.org/postgresql",
+  "hash": "835b8b83a43f84c1af5af7b4d5c3bf0e",
+  "name": "Postgres - Write to table",
+  "script": "\nconst { Client } = require('pg');\nlet client;\nmodule.exports = {\n    setup: async function(config) {\n        client = new Client({\n            user: config.username,\n            host: config.host,\n            database: config.database,\n            password: config.password,\n            port: 5432\n        });\n        await client.connect();\n    },\n    execute: async function(event, ctx, config) {\n        try {\n            await client.query('INSERT INTO events (operation, details) VALUES ($1, $2)', [event.operation, event.details]);\n        } catch(error) {\n            console.error(error);\n            throw \"Failed to insert into table\";\n        }\n    },\n    teardown: async function(config) {\n        await client.end();\n    }\n}\n",
+  "type": "DESTINATION",
+  "config": [
+    {
+      "key": "host",
+      "value": "",
+      "secret": false
+    },
+    {
+      "key": "username",
+      "value": "",
+      "secret": false
+    },
+    {
+      "key": "password",
+      "value": "",
+      "secret": true
+    },
+    {
+      "key": "database",
+      "value": "",
+      "secret": false
+    }
+  ]
+}
