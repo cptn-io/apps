@@ -1,0 +1,24 @@
+{
+  "key": "5402a14553564a309c8ea19667186f37",
+  "logoUrl": "https://cdn.simpleicons.org/twilio",
+  "hash": "89886245351e4503e2081780f038cb15",
+  "name": "Twilio - Send Text Message",
+  "script": "const Twilio = require('twilio')\n\nmodule.exports = {\n    execute: async function(event, ctx, config) { /* required */\n        const client = new Twilio(config.accountSid, config.authToken);\n        try {\n            await client.messages.create({\n                body: event.message,\n                to: event.to,\n                from: config.from,\n            });            \n        } catch (error) {        \n            console.error(error);\n            throw \"Failed to send message\";\n        }\n    }\n}",
+  "config": [
+    {
+      "key": "accountSid",
+      "value": "",
+      "secret": true
+    },
+    {
+      "key": "authToken",
+      "value": "",
+      "secret": true
+    },
+    {
+      "key": "from",
+      "value": "",
+      "secret": false
+    }
+  ]
+}
