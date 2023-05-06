@@ -1,0 +1,22 @@
+{
+  "key": "0db023fa762e4299be9a3c36d4aa8940",
+  "logoUrl": "https://cdn.simpleicons.org/googlecloud",
+  "hash": "dfb585af12c28cd1ca044f180b190b00",
+  "name": "GCP - Write to bucket",
+  "script":"const { Storage } = require('@google-cloud/storage');\n\nlet writeStream;\nmodule.exports = {\n    setup: async function(config) { /* optional */\n        const credentials = JSON.parse(config.CREDENTIALS);\n        const storage = new Storage({\n        credentials: credentials\n        });                \n        const bucket = storage.bucket(config.BUCKET_NAME);\n\n        const file = bucket.file(`${new Date().toISOString()}.json`);\n        writeStream = file.createWriteStream();\n    },\n    execute: function(event, ctx, config) { /* required */\n        writeStream.write(JSON.stringify(event)+\"\\n\", 'utf8');\n    },\n    teardown: function(config) {        \n        return new Promise((resolve, reject) => {        \n            writeStream.end();\n            writeStream.on('finish', () => {\n                console.log('Write complete to the bucket location');\n                resolve();\n            });\n            writeStream.on('error', (error) => {\n                console.error(\"Error writing to bucket\", error);\n                reject(error);\n            });\n        });\n    }\n}",
+  "type": "DESTINATION",
+  "config": [
+    {
+      "key": "CREDENTIALS",
+      "value": "",
+      "secret": true
+    },
+    {
+      "key": "BUCKET_NAME",
+      "value": "",
+      "secret": false
+    }
+  ]
+}
+
+
