@@ -1,0 +1,8 @@
+{
+  "key": "0bbe805073d541e18bbf21842c3eeaf3",
+  "logoUrl": null,
+  "hash": "4d1b4051d8dbc975e764ee4ee14b3429",
+  "name": "Drop events from pipeline",
+  "script": "module.exports = function (event, ctx) {\n  if(event.shouldDrop) {\n      return null;\n  }\n\n  return event;\n}\n",
+  "type": "TRANSFORMATION"
+}
