@@ -1,41 +1,34 @@
 {
-  "key": "e0764c944a3253abd0626b84586dd1a0",
-  "script": "const snowflake = require('snowflake-sdk');\n\nlet connection;\n\nmodule.exports = {\n    setup: function(config) { /* optional */        \n        const connectionConfig = {\n            account: config.account,\n            username: config.username,\n            password: config.password,\n            warehouse: config.warehouse,\n            database: config.database,\n            schema: config.schema,\n        };\n        \n        return new Promise ((resolve, reject) => {\n            connection = snowflake.createConnection(connectionConfig);\n            connection.connect(function(err, conn) {\n                if (err) {\n                    console.error('Unable to connect: ' + err.message);\n                    reject(err);\n                } \n                else {\n                    console.log('Successfully connected to Snowflake.');\n                    resolve();\n                }\n            });\n        });\n        \n    },\n    execute: async function(event, ctx, config) { /* required */\n    \n        return new Promise ((resolve, reject) => {\n            connection.execute({\n                sqlText: 'INSERT INTO CPTN_EVENT (EVENT_TYPE, IP_ADDR) VALUES (?, ?)',\n                binds: [event.type, event.ip],\n                complete: function(err, stmt, rows) {\n                    if (err) {\n                        console.error('Failed to execute statement due to the following error: ' + err.message);\n                        reject(err);\n                    } else {\n                        console.log('Successfully executed statement: ' + stmt.getSqlText());\n                        resolve();\n                    }\n                }\n            });\n        });\n        \n    },\n    teardown: function(config) { /* optional */\n\n        return new Promise ((resolve, reject) => {\n            connection.destroy(function(err, conn) {\n                if (err) {\n                    console.error('Unable to disconnect: ' + err.message);\n                    reject(err);\n                } else {\n                    console.log('Disconnected connection with id: ' + connection.getId());\n                    resolve();\n                }\n            });\n        });\n        \n    }\n}",
-  "name": "Snowflake - Write to table",
-  "hash": "b834c48ff17fee29df1db1c29e452e94",
-  "type": "DESTINATION",
-  "config": [
-    {
-      "key": "account",
-      "value": "",
-      "secret": false
-    },
-    {
-      "key": "username",
-      "value": "",
-      "secret": false
-    },
-    {
-      "key": "password",
-      "value": "",
-      "secret": false
-    },
-    {
-      "key": "warehouse",
-      "value": "",
-      "secret": false
-    },
-    {
-      "key": "database",
-      "value": "",
-      "secret": false
-    },
-    {
-      "key": "schema",
-      "value": "",
-      "secret": false
-    }
-  ],
-  "logoUrl": "https://cdn.simpleicons.org/snowflake",
-  "orderIndex": 100
+  "key" : "e0764c944a3253abd0626b84586dd1a0",
+  "script" : "const snowflake = require('snowflake-sdk');\n\nlet connection;\n\nmodule.exports = {\n    setup: function(config) { /* optional */        \n        const connectionConfig = {\n            account: config.account,\n            username: config.username,\n            password: config.password,\n            warehouse: config.warehouse,\n            database: config.database,\n            schema: config.schema,\n        };\n        \n        return new Promise ((resolve, reject) => {\n            connection = snowflake.createConnection(connectionConfig);\n            connection.connect(function(err, conn) {\n                if (err) {\n                    console.error('Unable to connect: ' + err.message);\n                    reject(err);\n                } \n                else {                    \n                    resolve();\n                }\n            });\n        });\n        \n    },\n    execute: async function(event, ctx, config) { /* required */\n    \n        return new Promise ((resolve, reject) => {\n            connection.execute({\n                sqlText: 'INSERT INTO CPTN_EVENT (EVENT_TYPE, IP_ADDR) VALUES (?, ?)',\n                binds: [event.type, event.ip],\n                complete: function(err, stmt, rows) {\n                    if (err) {\n                        console.error('Failed to execute statement due to the following error: ' + err.message);\n                        reject(err);\n                    } else {                        \n                        resolve();\n                    }\n                }\n            });\n        });\n        \n    },\n    teardown: function(config) { /* optional */\n\n        return new Promise ((resolve, reject) => {\n            connection.destroy(function(err, conn) {\n                if (err) {\n                    console.error('Unable to disconnect: ' + err.message);\n                    reject(err);\n                } else {                    \n                    resolve();\n                }\n            });\n        });\n        \n    }\n}",
+  "name" : "Snowflake",
+  "hash" : "1ae42ed290ad36cf1d414ea1a75add68",
+  "type" : "DESTINATION",
+  "config" : [ {
+    "key" : "account",
+    "value" : "",
+    "secret" : false
+  }, {
+    "key" : "username",
+    "value" : "",
+    "secret" : false
+  }, {
+    "key" : "password",
+    "value" : "",
+    "secret" : false
+  }, {
+    "key" : "warehouse",
+    "value" : "",
+    "secret" : false
+  }, {
+    "key" : "database",
+    "value" : "",
+    "secret" : false
+  }, {
+    "key" : "schema",
+    "value" : "",
+    "secret" : false
+  } ],
+  "logoUrl" : null,
+  "orderIndex" : 100
 }
