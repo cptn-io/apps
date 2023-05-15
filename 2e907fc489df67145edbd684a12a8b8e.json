@@ -1,0 +1,10 @@
+{
+  "key" : "2e907fc489df67145edbd684a12a8b8e",
+  "script" : "function clearNullProperties(obj) {\n  for (let key in obj) {\n    if (obj[key] === null) {\n      delete obj[key];\n    }\n  }\n}\n\nmodule.exports = function (event, ctx) {\n    clearNullProperties(event); \n    return event;\n}",
+  "name" : "Clear null props",
+  "hash" : "bce2c02beba6941f584fc0763c340baa",
+  "type" : "TRANSFORMATION",
+  "config" : [ ],
+  "logoUrl" : null,
+  "orderIndex" : 100
+}
