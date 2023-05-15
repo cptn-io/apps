@@ -1,0 +1,10 @@
+{
+  "key" : "5ca1493908a91b0991cbaeda648c90d7",
+  "script" : "module.exports = function (event, ctx) {\n    const random = Math.random();\n    if (random <= 0.05) { //5%\n        return event;\n    }\n\n    return;\n}",
+  "name" : "Sample 5% of events",
+  "hash" : "58ad4cb670f096a26d819e8d05769cea",
+  "type" : "TRANSFORMATION",
+  "config" : [ ],
+  "logoUrl" : null,
+  "orderIndex" : 100
+}
