@@ -2,7 +2,7 @@
   "key": "13040f7a900b376086556946be0316cd",
   "script": "const AWS = require('aws-sdk');\nconst { PassThrough } = require('stream');\n\nlet writeStream, uploadPromise;\nmodule.exports = {\n  setup: async function(config) { /* optional */\n    AWS.config.update({\n      accessKeyId: config.ACCESS_KEY_ID,\n      secretAccessKey: config.SECRET_ACCESS_KEY,\n      region: config.REGION\n    });\n\n    const s3 = new AWS.S3();\n    writeStream = new PassThrough();\n\n    const uploadOptions = {\n      Bucket: config.BUCKET_NAME,\n      Key: `${new Date().toISOString()}.json`,\n      Body: writeStream\n    };\n\n    uploadPromise = s3.upload(uploadOptions).promise();\n  },\n  execute: function(event, ctx, config) { /* required */\n    writeStream.write(JSON.stringify(event) + '\\n', 'utf8');\n  },\n  teardown: function(config) {  \n    writeStream.end(); \n    return uploadPromise;\n  }\n};\n",
   "name": "AWS - Write to S3 Bucket",
-  "hash": "160641b253e8a47add433c8b2a52d6ba",
+  "hash": "594110b0750b17db41d9154477bd3e24",
   "type": "DESTINATION",
   "config": [
     {
@@ -26,6 +26,6 @@
       "secret": false
     }
   ],
-  "logoUrl": null,
+  "logoUrl": "https://cdn.simpleicons.org/amazons3",
   "orderIndex": 100
 }
