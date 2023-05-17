@@ -17,6 +17,6 @@
     "value" : "",
     "secret" : true
   } ],
-  "logoUrl" : null,
+  "logoUrl" : "https://raw.githubusercontent.com/cptn-io/apps/dev/images/now.jpeg",
   "orderIndex" : 100
 }
