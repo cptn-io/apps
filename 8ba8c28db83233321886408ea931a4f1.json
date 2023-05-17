@@ -1,0 +1,22 @@
+{
+  "key" : "8ba8c28db83233321886408ea931a4f1",
+  "script" : "const axios = require('axios');\n\nmodule.exports = {    \n    execute: async function(event, ctx, config) {\n        try {\n            const response = await axios.post(`${config.INSTANCE_URL}/api/now/table/incident`, event, {\n                auth: {\n                    username: config.USERNAME,\n                    password: config.PASSWORD\n                },\n                headers: {\n                    'Content-Type': 'application/json'\n                }\n            });\n            console.log(`Incident created: ${response.data.result.number}`);\n        } catch(err) {\n            console.error(\"Error while creating incident\", err);\n            throw err;\n        }\n    }\n}",
+  "name" : "ServiceNow - Create an Incident",
+  "hash" : "97bc309308f3b8e5e1d74a3d23c8c240",
+  "type" : "DESTINATION",
+  "config" : [ {
+    "key" : "INSTANCE_URL",
+    "value" : "",
+    "secret" : false
+  }, {
+    "key" : "USERNAME",
+    "value" : "",
+    "secret" : false
+  }, {
+    "key" : "PASSWORD",
+    "value" : "",
+    "secret" : true
+  } ],
+  "logoUrl" : null,
+  "orderIndex" : 100
+}
