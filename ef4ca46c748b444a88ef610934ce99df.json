@@ -1,9 +1,9 @@
 {
   "key": "ef4ca46c748b444a88ef610934ce99df",
-  "logoUrl": "https://cdn.simpleicons.org/twilio",
-  "hash": "2354816326e8aa770929c21e3012badd",
+  "logoUrl": "https://logos.cptn.io/logos/sendgrid-icon.svg",
+  "hash": "276695a5047864d334f6a310046c5aca",
   "name": "Sendgrid - Send an email",
-  "script":"const sgMail = require('@sendgrid/mail')\n\nmodule.exports = {    \n    execute: async function(event, ctx, config) { /* required */\n        sgMail.setApiKey(config.SENDGRID_API_KEY);\n        const msg = {\n            to: event.mail_to,\n            from: config.EMAIL_FROM,\n            subject: 'Sending with SendGrid is Fun',\n            text: 'and easy to do anywhere, even with Node.js',\n            html: '<strong>and easy to do anywhere, even with Node.js</strong>',\n        }        \n\n        try {\n            await sgMail.send(msg)\n        } catch(error) {\n            console.log(\"Failed to send email\", error);\n            throw \"Failed to send via Sendgrid\";\n        }\n\n    }\n}",
+  "script": "const sgMail = require('@sendgrid/mail')\n\nmodule.exports = {    \n    execute: async function(event, ctx, config) { /* required */\n        sgMail.setApiKey(config.SENDGRID_API_KEY);\n        const msg = {\n            to: event.mail_to,\n            from: config.EMAIL_FROM,\n            subject: 'Sending with SendGrid is Fun',\n            text: 'and easy to do anywhere, even with Node.js',\n            html: '<strong>and easy to do anywhere, even with Node.js</strong>',\n        }        \n\n        try {\n            await sgMail.send(msg)\n        } catch(error) {\n            console.log(\"Failed to send email\", error);\n            throw \"Failed to send via Sendgrid\";\n        }\n\n    }\n}",
   "type": "DESTINATION",
   "config": [
     {
@@ -18,4 +18,3 @@
     }
   ]
 }
-
