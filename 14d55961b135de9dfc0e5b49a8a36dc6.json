@@ -1,0 +1,16 @@
+{
+  "key": "14d55961b135de9dfc0e5b49a8a36dc6",
+  "script": "const axios = require('axios');\n\nmodule.exports = {    \n    execute: async function(event, ctx, config) { /* required */\n        if(!config.URL) {\n            return;\n        }\n        try {\n            await axios.post(config.URL, event, {                \n                headers: {\n                    'Content-Type': 'application/json'\n                }\n            });            \n        } catch(err) {\n            console.error(\"Error while sending event to endpoint\", err);\n            throw err;\n        }\n    }\n}",
+  "name": "Webhooks - Send event to URL",
+  "hash": "2be742862efff4d84024a34a7a3d9d55",
+  "type": "DESTINATION",
+  "config": [
+    {
+      "key": "URL",
+      "value": "",
+      "secret": false
+    }
+  ],
+  "logoUrl": "https://logos.cptn.io/logos/webhooks.svg",
+  "orderIndex": 100
+}
