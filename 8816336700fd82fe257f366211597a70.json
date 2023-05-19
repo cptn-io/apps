@@ -1,0 +1,30 @@
+{
+  "key" : "8816336700fd82fe257f366211597a70",
+  "script" : "const { MongoClient } = require(\"mongodb\");\n\nlet client;\n\nmodule.exports = {\n    setup: async function(config) { /* optional */\n        //setup connection\n        const uri = `mongodb+srv://${config.username}:${config.password}@${config.cluster_url}?retryWrites=true&writeConcern=majority`;\n        client = new MongoClient(uri);\n        await client.connect();\n    },\n    execute: async function(event, ctx, config) { /* required */\n        //send to destination.\n        try {\n            const db = client.db(config.database);\n            const coll = db.collection(config.collection);\n            const result = await coll.insertOne(event);\n            console.log(`Document inserted: ${result.insertedId}`);\n        } catch(error) {\n            console.error(error);\n            throw \"Failed to insert into collection\";\n        }\n    },\n    teardown: async function(config) { /* optional */\n        //teardown connection\n        await client.close();\n    }\n}",
+  "name" : "MongoDB - Write to collection",
+  "hash" : "6c9aa8a53366bc910a8cb5f0c524f6b3",
+  "type" : "DESTINATION",
+  "config" : [ {
+    "key" : "cluster_url",
+    "value" : "",
+    "secret" : false 
+  }, {
+    "key" : "username",
+    "value" : "",
+    "secret" : false 
+  }, {
+    "key" : "password",
+    "value" : "",
+    "secret" : true
+  }, {
+    "key" : "database",
+    "value" : "",
+    "secret" : false 
+  }, {
+    "key" : "collection",
+    "value" : "",
+    "secret" : false 
+  } ],
+  "logoUrl" : "https://cdn.simpleicons.org/mongodb",
+  "orderIndex" : 100
+}
