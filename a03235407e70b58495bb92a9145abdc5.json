@@ -1,0 +1,31 @@
+{
+  "key": "a03235407e70b58495bb92a9145abdc5",
+  "script": "const mysql = require('mysql2');\n\nlet connection;\n\nmodule.exports = {\n  setup: function (config) {\n    connection = mysql.createConnection({\n      host: config.host,\n      user: config.username,\n      password: config.password,\n      database: config.database\n    });  \n  },\n\n  execute: async function (event, ctx, config) {\n    try {\n      await connection.promise().query('INSERT INTO events (operation, details) VALUES (?, ?)', [\n        event.operation,\n        event.details\n      ]);\n    } catch (error) {\n      console.error(error.message);\n      throw \"Failed to insert into table\";\n    }\n  },\n\n  teardown: async function (config) {\n    await connection.end();\n  }\n};\n",
+  "name": "MySQL - Write to table",
+  "hash": "223eb98836a39e5070100d32787f9a34",
+  "type": "DESTINATION",
+  "config": [
+    {
+      "key": "host",
+      "value": "",
+      "secret": false
+    },
+    {
+      "key": "username",
+      "value": "",
+      "secret": false
+    },
+    {
+      "key": "password",
+      "value": "",
+      "secret": true
+    },
+    {
+      "key": "database",
+      "value": "",
+      "secret": false
+    }
+  ],
+  "logoUrl": "https://logos.cptn.io/logos/mysql.svg",
+  "orderIndex": 100
+}
