@@ -1,0 +1,26 @@
+{
+  "key": "2a111448270b0a2a86bff785fadd9799",
+  "script": "const axios = require('axios');\n\nmodule.exports = {    \n    execute: async function(event, ctx, config) {\n        const work_notes = event.work_notes;\n        if (!work_notes) {\n            return;\n        }\n\n        try {\n            const payload = {\n                work_notes\n            };\n            const response = await axios.put(`${config.INSTANCE_URL}/api/now/table/incident/${event.sysId}`, payload, {\n                auth: {\n                    username: config.USERNAME,\n                    password: config.PASSWORD\n                },\n                headers: {\n                    'Content-Type': 'application/json'\n                }\n            });\n            console.log(`Incident updated with the work notes`);\n        } catch(err) {\n            console.error(\"Error while updating incident\", err);\n            throw err;\n        }\n    }\n}",
+  "name": "ServiceNow - Add work notes to Incident",
+  "hash": "578995a0025dea8acaf85d1da61e6763",
+  "type": "DESTINATION",
+  "config": [
+    {
+      "key": "INSTANCE_URL",
+      "value": "",
+      "secret": false
+    },
+    {
+      "key": "USERNAME",
+      "value": "",
+      "secret": false
+    },
+    {
+      "key": "PASSWORD",
+      "value": "",
+      "secret": true
+    }
+  ],
+  "logoUrl": "https://raw.githubusercontent.com/cptn-io/apps/dev/images/now.jpeg",
+  "orderIndex": 100
+}
