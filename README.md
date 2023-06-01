@@ -14,6 +14,8 @@ The Transformation or Destination defined on your instance is automatically down
 
 Update logoUrl (if applicable) attribute in the downloaded JSON file. We use brand logo icons at https://simpleicons.org/ for the apps, if applicable. SimpleIcons are hosted on CDN and accessible via https://cdn.simpleicons.org/<slug-id> (e.g. https://cdn.simpleicons.org/twilio)
   
+Feel free to add a comment part of the destination or transformation script for author credits.
+  
 ### Create a PR
 Create a new Pull Request for your Apps in this repo to *dev* branch. Add any testing instructions (if applicable) to the PR. If your service requires credentials for testing, send the instructions to support@devraven.io
   
