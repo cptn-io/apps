@@ -1,0 +1,26 @@
+{
+  "key": "41ec5ddfb3abe9f37f4483fa54704c36",
+  "script": "const Twilio = require('twilio')\n\nmodule.exports = {\n    execute: async function(event, ctx, config) { /* required */\n        const client = new Twilio(config.accountSid, config.authToken);\n        try {\n            await client.messages.create({\n                body: event.message,\n                to: `whatsapp:${event.to}`,\n                from: `whatsapp:${config.from}`,\n            });            \n        } catch (error) {        \n            console.error(error);\n            throw \"Failed to send message\";\n        }\n    }\n}",
+  "name": "Twilio - Send Whatsapp message",
+  "hash": "4637604132c85c66ff605466afe0e31a",
+  "type": "DESTINATION",
+  "config": [
+    {
+      "key": "accountSid",
+      "value": "",
+      "secret": true
+    },
+    {
+      "key": "authToken",
+      "value": "",
+      "secret": true
+    },
+    {
+      "key": "from",
+      "value": "",
+      "secret": false
+    }
+  ],
+  "logoUrl": "https://logos.cptn.io/logos/twilio-icon.svg",
+  "orderIndex": 100
+}
