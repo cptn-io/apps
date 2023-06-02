@@ -1,0 +1,16 @@
+{
+  "key": "3dbe92294e506f72187c816329df9801",
+  "script": "const { Configuration, OpenAIApi } = require(\"openai\");\n\nmodule.exports = async function (event, ctx, config) {\n\n    if(!event.text) {\n        return event;\n    }\n\n    const configuration = new Configuration({\n        apiKey: config.OPENAI_API_KEY,\n    });\n    const openai = new OpenAIApi(configuration);\n\n    const response = await openai.createCompletion({\n        model: \"text-davinci-003\",\n        prompt: `${event.text}\\n\\ntl;dr`,\n        temperature: 0.7,\n        max_tokens: 60,\n        top_p: 1.0,\n        frequency_penalty: 0.0,\n        presence_penalty: 1,\n    });\n\n    event.summary = response.data?.choices?.[0]?.text;\n    return event;\n}",
+  "name": "OpenAI - TL;DR Summary",
+  "hash": "600c5076eb5c84906d6624aadb243dae",
+  "type": "TRANSFORMATION",
+  "config": [
+    {
+      "key": "OPENAI_API_KEY",
+      "value": "",
+      "secret": true
+    }
+  ],
+  "logoUrl": "https://logos.cptn.io/logos/openai-icon.svg",
+  "orderIndex": 100
+}
