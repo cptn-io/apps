@@ -1,8 +1,8 @@
 {
   "key": "2feb0e482ea7de9a1dcfde42e389f5f6",
-  "script": "const { Configuration, OpenAIApi } = require(\"openai\");\n\nmodule.exports = async function (event, ctx, config) {\n\n    if(!event.text) {\n        return event;\n    }\n\n    const configuration = new Configuration({\n        apiKey: config.OPENAI_API_KEY,\n    });\n    const openai = new OpenAIApi(configuration);\n\n    const response = await openai.createCompletion({\n        model: \"text-davinci-003\",\n        prompt: `Extract keywords from this text:\\n\\n${event.text}`,\n        temperature: 0.5,\n        max_tokens: 60,\n        top_p: 1.0,\n        frequency_penalty: 0.8,\n        presence_penalty: 0.0,\n    });\n    console.log(response.data);\n    event.keywords = response.data?.choices?.[0]?.text;\n    return event;\n}",
+  "script": "const { Configuration, OpenAIApi } = require(\"openai\");\n\nmodule.exports = async function (event, ctx, config) {\n\n    if(!event.text) {\n        return event;\n    }\n\n    const configuration = new Configuration({\n        apiKey: config.OPENAI_API_KEY,\n    });\n    const openai = new OpenAIApi(configuration);\n\n    const response = await openai.createCompletion({\n        model: \"text-davinci-003\",\n        prompt: `Extract keywords from this text:\\n\\n${event.text}`,\n        temperature: 0.5,\n        max_tokens: 60,\n        top_p: 1.0,\n        frequency_penalty: 0.8,\n        presence_penalty: 0.0,\n    });\n\n    event.keywords = response.data?.choices?.[0]?.text;\n    return event;\n}",
   "name": "OpenAI - Extract keywords",
-  "hash": "0b8d0be7ab8eabd72868b8f59be6aaca",
+  "hash": "07d461f84903e1671505578c7e48d28d",
   "type": "TRANSFORMATION",
   "config": [
     {
