@@ -1,0 +1,16 @@
+{
+  "key": "dbbba60f7a868eedba9ad9c037854336",
+  "script": "const { Configuration, OpenAIApi } = require(\"openai\");\n\nmodule.exports = async function (event, ctx, config) {\n\n    const configuration = new Configuration({\n        apiKey: config.OPENAI_API_KEY,\n    });\n    const openai = new OpenAIApi(configuration);\n    const prompt = `short description: ${event.shortDescription}\\ndescription: ${event.description}\\n\"\"\"\\nHere is the analysis for the above incident:`;\n    const response = await openai.createCompletion({\n        model: \"text-davinci-003\",\n        prompt,\n        temperature: 0,\n        max_tokens: 100,\n        top_p: 1.0,\n        frequency_penalty: 0.0,\n        presence_penalty: 0.0,\n        stop: [\"\\\"\\\"\\\"\"],\n    });    \n    event.analysis = response.data?.choices?.[0]?.text;\n\n    return event;\n}",
+  "name": "OpenAI - Analyze incident",
+  "hash": "e0890fe1b3ce7a215bc1d714f151b3e5",
+  "type": "TRANSFORMATION",
+  "config": [
+    {
+      "key": "OPENAI_API_KEY",
+      "value": "",
+      "secret": true
+    }
+  ],
+  "logoUrl": "https://logos.cptn.io/logos/openai-icon.svg",
+  "orderIndex": 100
+}
